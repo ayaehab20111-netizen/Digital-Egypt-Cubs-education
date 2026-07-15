@@ -1,0 +1,217 @@
+/* -------------------------------------------------------------------------- */
+/*  Brand Colors and Status Badges   */
+/* -------------------------------------------------------------------------- */
+:root {
+    --brand-primary: #0d6efd;
+    --brand-secondary: #ffc107;
+    
+    /* Badges Specific Hex Codes */
+    --badge-amber: #ffbf00;    /* Coming Soon */
+    --badge-green: #198754;    /* Open Now */
+    --badge-gray: #6c757d;     /* Closed */
+    --badge-blue: #0dcaf0;     /* Open Soon */
+}
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    background-color: #fbfbfb;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.max-w-form {
+    max-width: 550px;
+}
+
+.max-w-md {
+    max-width: 800px;
+}
+
+/* Pill Buttons with Hover Transitions */
+.pill-btn {
+    border-radius: 50px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.pill-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.15);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+}
+
+/* Badge colors assignments */
+.badge-coming-soon { background-color: var(--badge-amber); color: #000; font-weight: bold; padding: 6px 12px; border-radius: 20px;}
+.badge-open-now { background-color: var(--badge-green); color: #fff; font-weight: bold; padding: 6px 12px; border-radius: 20px;}
+.badge-closed { background-color: var(--badge-gray); color: #fff; font-weight: bold; padding: 6px 12px; border-radius: 20px;}
+.badge-open-soon { background-color: var(--badge-blue); color: #000; font-weight: bold; padding: 6px 12px; border-radius: 20px;}
+
+/* -------------------------------------------------------------------------- */
+/*  Hero Elements (Blobs, Layered Background, Frosted Glass)                  */
+/* -------------------------------------------------------------------------- */
+.hero-section {
+    min-height: 85vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 80px 0;
+}
+
+/* Blurred Blob Shapes Background */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    z-index: 1;
+    opacity: 0.45;
+    animation: blobAnimation 8s infinite alternate ease-in-out;
+}
+.blob-1 {
+    width: 300px;
+    height: 300px;
+    background-color: #0dcaf0;
+    top: 10%;
+    left: -50px;
+}
+.blob-2 {
+    width: 400px;
+    height: 400px;
+    background-color: #0d6efd;
+    bottom: 10%;
+    right: -50px;
+    animation-delay: 2s;
+}
+
+/* Frosted glass card structure */
+.frosted-glass-card {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.08);
+}
+
+/* Fixed-ratio 16:9 Image Wrapper styling */
+.image-wrapper {
+    border-radius: 24px;
+    overflow: hidden;
+    border: 4px solid white;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Pure CSS Hamburger Drawer       */
+/* -------------------------------------------------------------------------- */
+.hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 26px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 1001;
+}
+.hamburger-icon span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #333;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Drawer CSS Position styling */
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background-color: rgba(13, 110, 253, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+}
+
+/* Open/Close Drawer Trigger strictly via CSS selectors */
+#nav-toggle:checked ~ .mobile-drawer {
+    right: 0;
+}
+#nav-toggle:checked ~ .main-navbar .hamburger-icon span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+#nav-toggle:checked ~ .main-navbar .hamburger-icon span:nth-child(2) {
+    opacity: 0;
+}
+#nav-toggle:checked ~ .main-navbar .hamburger-icon span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Desktop Navigation Link Animation effect */
+.nav-item-link {
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.3s ease;
+}
+.nav-item-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--brand-primary);
+    transition: width 0.3s ease;
+}
+.nav-item-link:hover::after {
+    width: 100%;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  UI Interaction Animations & Transitions Rules                             */
+/* -------------------------------------------------------------------------- */
+.transition-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.transition-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08) !important;
+}
+
+.course-details summary::marker, .faq-item summary::marker {
+    color: var(--brand-primary);
+}
+
+/* Keyframes animations declarations */
+@keyframes blobAnimation {
+    0% { transform: translate(0px, 0px) scale(1); }
+    100% { transform: translate(30px, -40px) scale(1.15); }
+}
+
+@keyframes fadeInEffect {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeInEffect 1s ease-out forwards;
+}
+
+/* Media Query to ensure drawer stays clean if resized */
+@media (min-width: 768px) {
+    .mobile-drawer {
+        display: none !important;
+    }
+}
+
+/* Custom Responsive Font/Padding Adjustment Rule  */
+@media (max-width: 576px) {
+    h1.display-4 {
+        font-size: 2.2rem !important;
+    }
+    .frosted-glass-card {
+        padding: 1.5rem !important;
+    }
+}
